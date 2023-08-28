@@ -1,0 +1,515 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+			<!--Register page-->
+			<section class="tabs-section">
+				<div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>Available Rides</h2>
+					</div>
+					<div class="row justify-content-center">
+						<!-- Register Card -->
+						<div class="tabs-block col-12">
+							<div class="inner-box">
+								<div class="content-box px-4 py-3">
+									<div class="form-check form-switch">
+										<input class="form-check-input nextRides"  type="checkbox">
+										<label class="text-dark ps-2">Other Rides
+											<span class="labeltag ms-2 other_rides_count">0</span>
+										</label>
+									  </div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<div class="tabs-block col-12 d-none no-connected no_connected">
+						<div class="inner-box">
+							<div class="px-4 py-3 text-center">
+									<label class="text-dark ps-2">Connected</label><br>
+									<label class="text-dark ps-2">There are no active auctions.
+									</label>
+							</div>
+						</div>
+					</div>
+					<div class="row return_data_current_rides">
+						
+					</div>
+               <div class="row return_data_current_rides_others d-none">
+						
+					</div>
+					<!-- <div class="row return_data_current_rides_no_found"></div>
+               		<div class="row return_data_expire_rides"></div> -->
+				</div>
+			</section>
+			<!--End Register page-->
+
+{% endblock %}
+{% block external_js %}
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+
+<script>
+$(document).ready(function () {
+   // Attach a change event handler to the toggle checkbox
+   $('.nextRides').change(function () {
+      // Check if the checkbox is checked or not
+      var isChecked = $(this).prop('checked');
+      var dynamic_main_area_main = $('.dynamic_main_area_main').length;
+
+      // Perform actions based on the checked state
+      if (isChecked) {
+         $('.return_data_current_rides').addClass('d-none');
+         $('.no_connected').attr("style", "display: none !important");
+         $('.return_data_current_rides_others').attr("style", "display: flex !important");
+      } else {
+			if (dynamic_main_area_main == 0) {
+				$('.no_connected').attr("style", "display: block !important");
+			}
+        $('.return_data_current_rides_others').attr("style", "display: none !important");
+        $('.return_data_current_rides').attr("style", "display: block !important");
+         
+      }
+   });
+
+});
+
+
+function openTab(event, tabName) {
+   var i, tabcontent, tablinks;
+
+   // Hide all tab content
+   tabcontent = document.getElementsByClassName("tabcontent");
+   for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+   }
+
+   // Remove "active" class from all tab links
+   tablinks = document.getElementsByClassName("tablinks");
+   for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+   }
+
+   // Show the selected tab content
+   document.getElementById(tabName).style.display = "block";
+
+   // Add the "active" class to the button that opened the tab
+   event.currentTarget.className += " active";
+}
+
+$(document).ready(function () {
+
+   get_reservations().then(r => '');
+   $('.spinner_temparary_class').show();
+   async function get_reservations() {
+      try {
+         let return_data = '';
+         let return_data_expire = '';
+         let reservation_class = '';
+         let return_data_others = '';
+         let not_found = 0;
+         const endpoint = 'get_reservations';
+         const request_type = 'post';
+         const payload = {
+            "postal_code": get_postal_code,
+            "company_id": user_id,
+         }
+         $('.return_data_current_rides').empty();
+         $('.return_data_expire_rides').empty();
+         const response = await request(request_type, payload, endpoint);
+		 console.log(response)
+         if (response.status == 1) {
+            $('.spinner_temparary_class').hide();
+            var response_data = response.data['pending'].length
+			console.log(response_data)
+            if (response_data !== 0) {
+               $.each(response.data['pending'], function (index, value) {
+				console.log(value)
+                  var bid_status_icon = '';
+                  if (value.vehicle_type == 1) {
+                     vehicle_type_value = 'Estate';
+                  } else {
+                     vehicle_type_value = 'Van';
+                  }
+
+                  var companyIDToCheck = parseInt(user_id); // Enter the company ID you want to check
+                  var reservationBidIDs = value.reservation_bid_id;
+                  var edited_time = value.edited_time;
+                  var edited_time = moment(edited_time);
+                  var currentDate = moment();
+                  var currentTime = currentDate.format('YYYY-MM-DD HH:mm:ss');
+
+
+                  var formattedDate = edited_time.format("dddd, MMMM D, YYYY");
+                  var driver_comment = value.driver_comment;
+                  var date = moment(value.pickup_date);
+                  var pickup_time_formated = date.format("MMMM D");
+                  var pickup_time = moment(value.pickup_time, "HH:mm:ss").format("hh:mm A");
+                  var admin_min_price = value.admin_min_price;
+                  var admin_max_price = value.admin_max_price;
+                  var currentPrice = admin_min_price;
+                  var id = value.id;
+                  var bidDuration = parseInt(value.bid_duration); // bid duration in minutes
+                  var editedMoment = moment(value.edited_time); // convert edited time to Moment object
+                  var endTime = editedMoment.add(value.bid_duration, 'minutes'); // add bid duration to the edited time
+                  var formattedEndTime = endTime.format('YYYY-MM-DD HH:mm:ss');
+                 
+                  if (driver_comment == "") {
+                     driver_comment = "No Comment";
+                  }
+
+                  var isFound = reservationBidIDs.some(function (bid) {
+
+					      return bid.company === companyIDToCheck;
+                  });
+                  
+                  if (isFound) {
+                     bid_status = 'd-none';
+                     reservation_class = '';
+                  } else {
+                     bid_status = 'd-block';
+                     reservation_class = 'reservation_bid';
+                  }
+                  if (currentTime < formattedEndTime) {
+                     return_data += `<div class="tabs-block col-12 dynamic_main_area_main dynamic_main_area col-xxl-6 col-lg-6 col-md-12 ${bid_status} main_area_${id}">
+							<div class="inner-box">
+								<div class="content-box p-4">
+									<div class="">
+										<div class="ridedetail-header">
+											<div class="ridedetails">
+												<p class="title">${formattedDate}</p>
+											</div>
+											<div class="">
+												<span class="labeltag ms-2 bid_duration_${id}"></span>`;
+                     return_data += `<span class="labeltag ms-2 currentPrice currentPrice_${id}">€0</span><span class="labeltag ms-2">€ ${value.admin_max_price}</span>
+											</div>
+										</div>
+										<hr>
+										<div class="ridedetail-body row">
+											<div class="col">
+												<div class="mb-4">
+													<div class="d-flex">
+														<div class="time">
+															<p class="mb-0 d-flex align-items-center">
+																<span class="time-txt">${pickup_time_formated}</span>
+																<i class="fa fa-dot-circle"></i>
+															</p>
+														</div>
+														<div class="address">
+															<p class="mb-0">
+																<span class="label">${value.from_postal_code}</span>
+																<span class="address-txt">${value.from_postal_code}</span>
+															</p>
+														</div>
+													</div>
+													<div class="d-flex">
+														<div class="time">
+															<p class="mb-0 d-flex align-items-center">
+																<span class="time-txt">${pickup_time}</span>
+																<i class="fa fa-map-marker location"></i>
+															</p>
+														</div>
+														<div class="address">
+															<p class="mb-0">
+																<span class="label">${value.to_postal_code}</span>
+																<span class="address-txt">${value.to_postal_code}</span>
+															</p>
+														</div>
+													</div>
+												</div>
+												<div class="mb-2">
+													<div class="d-flex">
+														<p class="mb-0 detail-lable">Distance: <span>${value.kilometer}km</span>
+														</p>
+													</div>
+													<div class="d-flex">
+														<p class="mb-0 detail-lable">Booking Number: <span>ST-${value.id}</span>
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col border-v-dashed">
+												<div class="icon-list">
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-plane"></i>
+														</div>
+														<span>${value.flight_number}</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-suitcase"></i>
+														</div>
+														<span>${value.no_of_hand_bags} Pieces of handluggage</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-users"></i>
+														</div>
+														<span>${value.total_passenger} People</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-comments"></i>
+														</div>
+														<span>${driver_comment}</span>
+													</div>
+												</div>
+											</div>
+                                 <div class="mt-1 ${bid_status}">
+                                    <a href="javascript:;" id="${value.id}" company_id="${user_id}" type="1" admin_reservation_price="${value.reservation_price}" class="theme-btn btn-style-one small-btn ${reservation_class}">
+                                       <span class="btn-title">Reserve Now</span>
+                                    </a>
+                                 </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>`;
+					    var remainingMinutes = endTime.diff(currentTime, 'minutes');
+                        var remainingSeconds = endTime.diff(currentTime, 'seconds') % 60;
+                        var interval = setInterval(function () {
+                           if (remainingMinutes >= 0 && remainingSeconds >= 0) {
+                              if (remainingSeconds === 0 && remainingMinutes > 0) {
+                                 remainingMinutes--;
+                                 remainingSeconds = 59;
+                              } else if (remainingSeconds > 0) {
+                                 remainingSeconds--;
+                              }
+                              var remainingTimeText = remainingMinutes + " : " + remainingSeconds;
+							  $('.bid_duration_' + id).text(remainingTimeText);
+							  if ($('.bid_duration_' + id).text() == '0 : 0') {
+								$('.main_area_' + id).addClass('d-none');
+                                 $('.main_area_' + id).hide();
+							  } else {
+								console.log("No here")
+							  }
+                           } else {
+                              var interval = setInterval(function () {
+                                 $('.main_area_' + id).addClass('d-none');
+                                 $('.main_area_' + id).hide();
+                              }, 1000);
+                           }
+                        }, 1000);
+                    
+						// Function to generate a random number between min and max
+						function getRandomNumber(min, max) {
+							return Math.random() * (max - min) + min;
+						}
+						$(document).ready(function () {
+							var currentPrice = admin_min_price;
+							var interval = setInterval(function () {
+							// Add random number to the current price
+							var randomNumber = getRandomNumber(0, 1);
+							currentPrice += randomNumber;
+
+							// Log the current price
+							$('.currentPrice_' + id).text(currentPrice.toFixed(2))
+							// Check if the current price reaches or exceeds the max price
+							if (currentPrice >= admin_max_price) {
+								clearInterval(interval);
+								$('.currentPrice_' + id).text(admin_max_price)
+							}
+							}, 2000); // Interval in milliseconds (change as desired)
+						});
+                     not_found = 0;
+               } else {
+                  not_found = 1;
+                  return_data_others = `<div class="tabs-block col-6 dynamic_main_area_other dynamic_main_area col-xxl-6 col-lg-6 col-md-6 main_area_${id}">
+							<div class="inner-box">
+								<div class="content-box p-4">
+									<div class="">
+										<div class="ridedetail-header">
+											<div class="ridedetails">
+												<p class="title">${formattedDate}</p>
+											</div>
+											<div class="">`;
+                           return_data_others += `<span class="labeltag ms-2">€ ${value.admin_max_price}</span>
+											</div>
+										</div>
+										<hr>
+										<div class="ridedetail-body row">
+											<div class="col">
+												<div class="mb-4">
+													<div class="d-flex">
+														<div class="time">
+															<p class="mb-0 d-flex align-items-center">
+																<span class="time-txt">${pickup_time_formated}</span>
+																<i class="fa fa-dot-circle"></i>
+															</p>
+														</div>
+														<div class="address">
+															<p class="mb-0">
+																<span class="label">${value.from_postal_code}</span>
+																<span class="address-txt">${value.from_postal_code}</span>
+															</p>
+														</div>
+													</div>
+													<div class="d-flex">
+														<div class="time">
+															<p class="mb-0 d-flex align-items-center">
+																<span class="time-txt">${pickup_time}</span>
+																<i class="fa fa-map-marker location"></i>
+															</p>
+														</div>
+														<div class="address">
+															<p class="mb-0">
+																<span class="label">${value.to_postal_code}</span>
+																<span class="address-txt">${value.to_postal_code}</span>
+															</p>
+														</div>
+													</div>
+												</div>
+												<div class="mb-2">
+													<div class="d-flex">
+														<p class="mb-0 detail-lable">Distance: <span>${value.kilometer}km</span>
+														</p>
+													</div>
+													<div class="d-flex">
+														<p class="mb-0 detail-lable">Booking Number: <span>ST-${value.id}</span>
+														</p>
+													</div>
+												</div>
+											</div>
+											<div class="col border-v-dashed">
+												<div class="icon-list">
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-plane"></i>
+														</div>
+														<span>${value.flight_number}</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-suitcase"></i>
+														</div>
+														<span>${value.no_of_hand_bags} Pieces of handluggage</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-users"></i>
+														</div>
+														<span>${value.total_passenger} People</span>
+													</div>
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-comments"></i>
+														</div>
+														<span>${driver_comment}</span>
+													</div>
+												</div>
+											</div>
+                                 <div class="mt-1">
+                                    <a href="javascript:;" id="${value.id}" company_id="${user_id}" type="2" admin_reservation_price="${value.admin_max_price}" class="theme-btn btn-style-one small-btn reservation_bid">
+                                       <span class="btn-title">Reserve Now</span>
+                                    </a>
+                                 </div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>`;
+                  // console.log(return_data_others)
+                  $('.return_data_current_rides_others').append(return_data_others)
+               }
+               })
+            } else {
+               return_data += `<div class="tabs-block col-12 wow">
+								<div class="inner-box">
+									<div class="px-4 py-3 text-center">
+											<label class="text-dark ps-2">Connected</label><br>
+											<label class="text-dark ps-2">There are no active auctions.
+											</label>
+									</div>
+								</div>
+							</div>`;
+            }
+         }
+         $('.return_data_current_rides').append(return_data);
+        
+         var interval = setInterval(function () {
+            if (not_found == 1) {
+               $('.no-connected').removeClass('d-none');
+               $('.no-connected').addClass('d-block');
+            }
+			$('.other_rides_count').text($('.dynamic_main_area_other').length)
+         }, 1000);
+
+      } catch (err) {
+         console.log(err);
+      }
+   }
+})
+
+
+$(document).on('click', '.reservation_bid', function (e) {
+   var reservation_id = $(this).attr('id');
+   var company_id = $(this).attr('company_id');
+   var type = $(this).attr('type');
+   var admin_reservation_price = 0;
+   if (type == 1) {
+	 admin_reservation_price = $(this).closest('.dynamic_main_area').find('.currentPrice').text();
+   } else {
+	 admin_reservation_price = $(this).attr('admin_reservation_price');
+   }
+   $('.dynamic_area').html(`<div class="login_area">
+   <div class="sec-title mb-0 pb-3">
+	 <span class="sub-title">Reservation Bid </span>
+   </div>
+	   <input required class="form-control mb-3 reservation_bid_price" value="${admin_reservation_price}" type="text" />
+	   <button class="theme-btn btn-style-one mt-2 w-100 btn_reservation_bid" reservation_id="${reservation_id}" company_id="${company_id}" admin_reservation_price="${admin_reservation_price}">
+		 <span class="btn-title">Bid Now</span>
+	   </button>
+ </div>
+</div>`)
+   $('#loginmodal').modal('show');
+
+})
+
+$(document).on('click', '.btn_reservation_bid', function (e) {
+   var reservation_id = $(this).attr('reservation_id');
+   var company_id = $(this).attr('company_id');
+   var reservation_bid_price = $('.reservation_bid_price').val();
+   var admin_reservation_price = $(this).attr('admin_reservation_price')
+   $('.btn_reservation_bid').text("Processing..");
+   $(".btn_reservation_bid").attr("disabled", true);
+
+   reservation_bid().then(r => '');
+   async function reservation_bid() {
+      try {
+         const endpoint = 'reservation_bid';
+         const request_type = 'post';
+         const payload = {
+            "reservation_id": reservation_id,
+            "company_id": company_id,
+            "price": reservation_bid_price
+         };
+         const response = await request(request_type, payload, endpoint);
+         if (response.status === 1) {
+            showmessage('success', response.developer_message, 'Success');
+            setTimeout(function () {
+               $('.btn_reservation_bid').text("Register");
+               $(".btn_reservation_bid").attr("disabled", false);
+               window.location.href = "/myrides";
+            }, 3000);
+         } else {
+            $('.btn_reservation_bid').text("Register");
+            $(".btn_reservation_bid").attr("disabled", false);
+            showmessage('error', response.developer_message, 'Error');
+         }
+      } catch (err) {
+         console.log(err);
+      }
+   }
+})
+
+
+
+</script>
+{% endblock %}

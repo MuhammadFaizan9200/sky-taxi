@@ -1,0 +1,706 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+			<section class="tabs-section">
+				<div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>My Rides</h2>
+					</div>
+					<div class="row justify-content-center">
+						<div class="tabs-block col-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+								<div class="content-box p-3">
+									<div class="d-flex justify-content-between align-items-center">
+										<label class="text-dark ps-2 fw-bold">My Rides</label>
+										<div class="d-flex">
+											<div class="icon-s-btn active">
+												<i class="fas fa-chevron-left"></i>
+											</div>
+											<div class="icon-s-btn">
+												<i class="fas fa-chevron-right"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>		
+					<div class="row justify-content-center">
+						<div class="tabs-block col-12 col-xxl-4 col-lg-4 col-md-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+								<div class="content-box p-3">
+									<div class="calendar calendar-first" id="calendar_first">
+										<div class="calendar_header">
+											<button class="switch-month switch-left"> <i class="fa fa-chevron-left"></i></button>
+											<h2></h2>
+											<button class="switch-month switch-right"> <i class="fa fa-chevron-right"></i></button>
+										</div>
+										<div class="calendar_weekdays"></div>
+										<div class="calendar_content"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+				
+					   <div class="tabs-block col-12 col-xxl-8 col-lg-8 col-md-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+						<div class="row return_data_current_rides"></div>						
+					</div>	
+
+{% endblock %}
+{% block external_js %}
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script>
+$(document).ready(function () {
+
+$('.spinner_temparary_class').show();
+
+get_reservations().then(r => '');
+$('.spinner_temparary_class').show();
+async function get_reservations() {
+   try {
+	  let return_data = '';
+	  let return_data_expire = '';
+	  let reservation_class = '';
+	  const endpoint = 'get_reservations';
+	  const request_type = 'post';
+	  const payload = {
+		 "postal_code": get_postal_code,
+		 "company_id": user_id,
+		 "user_type": get_user_level
+	  }
+	  $('.return_data_current_rides').empty();
+	  $('.return_data_expire_rides').empty();
+	  const response = await request(request_type, payload, endpoint);
+	  
+	  if (response.status == 1) {
+		 $('.spinner_temparary_class').hide();
+		 var response_data = response.data['complete'].length
+		 var response_pending = response.data['pending'].length
+
+		 if (response_pending !== 0) {
+			if(get_user_level == 2) {
+				$.each(response.data['pending'], function (index, value) {
+				var bid_status_icon = '';
+				if (value.vehicle_type == 1) {
+					vehicle_type_value = 'Estate';
+				} else {
+					vehicle_type_value = 'Van';
+				}
+				var companyIDToCheck = parseInt(user_id); // Enter the company ID you want to check
+				var reservationBidIDs = value.reservation_bid_id;
+				var BidIDs="";
+				if (reservationBidIDs[0]) {
+						BidIDs=reservationBidIDs[0].id;
+						console.log(BidIDs);
+					}
+				var edited_time = value.edited_time;
+				var edited_time = moment(edited_time);
+				var currentDate = moment();
+				var currentformattedDate = currentDate.format('DD-MM-YYYY');
+				var formattedDate = edited_time.format("dddd, MMMM D, YYYY");
+				var formattedDatRide = edited_time.format("dddd, MMMM D, YYYY");
+				var formattedDate = edited_time.format("d");
+				var edited_time_formated = edited_time.format('DD-MM-YYYY'); 
+				var driver_comment = value.driver_comment;
+				var date = moment(value.pickup_date);
+				var pickup_time_formated = date.format("MMMM D");
+				var pickup_time = moment(value.pickup_time, "HH:mm:ss").format("hh:mm A");
+				var admin_min_price = value.admin_min_price;
+				var admin_max_price = value.admin_max_price;
+				var currentPrice = admin_min_price;
+				var id = value.id;
+				var reservation_location_id = value.reservation_location_id
+				var vehicle_type_text="";
+				
+				if (driver_comment == "") {
+					driver_comment = "No Comment";
+				}
+				var isFound = reservationBidIDs.some(function (bid) {
+					return bid.company === companyIDToCheck;
+				});
+
+				if (value.vehicle_type==1)
+					{
+						vehicle_type_text="Estate";
+					}
+					else
+					{
+						vehicle_type_text="Van";
+					}  			
+													
+				if (isFound) {
+					bid_status = 'd-none';
+					reservation_class = '';
+				} else {
+					bid_status = 'd-block';
+					reservation_class = 'reservation_bid';
+				}
+
+				return_data +=` <div class="inner-box mb-4 hidden_all hidden_data_${formattedDate}">
+									<div class="content-box p-4">
+										<div class="ridedetail-card">	
+											<div class="ridedetail-header">
+												<div class="ridedetails">
+													<p class="title">${formattedDatRide}</p>
+												</div>
+												<div class="text-dark">
+													<label>E2QEU5BD</label>
+												</div>
+											</div>
+											<hr>
+											<div class="ridedetail-body row pt-2">
+												<div class="col">`;
+											$.each(reservation_location_id, function (index, value) {	
+												if (value.from_postal) {
+													return_data +=`<div class="d-flex mb-3">`;
+														if (index == 0) {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt">${pickup_time_formated}</span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														}
+														if (index == 0) {
+															return_data +=`<div class="address">
+																<p class="mb-0">
+																	<span class="label">${value.from_postal}</span>
+																	<span class="address-txt">${value.from_postal}</span>
+																</p>
+															</div>`
+														}
+														return_data +=`</div>`
+												}
+												if (value.to_postal) {
+													return_data +=`<div class="d-flex mb-3">`;
+														if (index == 1) {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt">${pickup_time}</span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														} else {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt"></span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														}
+														return_data +=`<div class="address">
+																<p class="mb-0">
+																	<span class="label">${value.to_postal}</span>
+																	<span class="address-txt">${value.to_postal}</span>
+																</p>
+															</div>
+														</div>`
+												}
+												})
+												return_data +=`</div>
+												<div class="col text-end">
+													<a href="javascript:;" class="theme-btn btn-style-one small-btn m-0">
+														<span class="btn-title">${vehicle_type_text}</span>
+													</a>
+												</div>
+											</div>
+											<span class="border-h-dashed"></span>
+											<div class="ridedetail-body row">
+												<div class="col">
+													<div class="my-3">
+														<div class="icon-list">
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-plane"></i>
+																</div>
+																<span>${value.flight_number}</span>
+															</div>
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-suitcase"></i>
+																</div>
+																<span>${value.no_of_bags} small checked bags</span>
+															</div>
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-suitcase"></i>
+																</div>
+																<span>${value.no_of_hand_bags}  pieces of hand luggage</span>
+															</div>
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-users"></i>
+																</div>
+																<span>${value.total_passenger} persons</span>
+															</div>
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-money-bill-wave"></i>
+																</div>
+																<span>${value.reservation_price}													</span>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="col border-v-dashed">
+													<div class="my-4">
+														<div class="icon-list">
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-phone"></i>
+																</div>
+																<span>${value.phone_number}</span>
+															</div>
+															<div class="d-flex">
+																<div class="icon">
+																	<i class="fa fa-user"></i>
+																</div>
+																<span>${value.name}</span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<span class="border-h-dashed"></span>
+											<div class="col">
+												<div class="my-3">
+													<div class="icon-list">
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-comments"></i>
+															</div>
+															<span>Note: Correct telephone number: 0618365662 Please call this number!</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<span class="border-h-dashed"></span>
+											<div class="ridedetail-body mt-1 row g-2">
+												<div class="col">
+													<a href="tel:+31231312302" class="theme-btn btn-style-one small-btn w-100">
+														<span class="btn-title">Call Customer</span>
+													</a>
+												</div>
+												<div class="col">
+													<a href="javascript:;" reservation_id="${id}"  bid_id="${BidIDs}" class="theme-btn btn-style-one small-btn w-100 rides_popup">
+														<span class="btn-title">Return Ride</span>
+													</a>
+												</div>
+												<div class="col">
+													<a href="javascript:;" class="theme-btn btn-style-one small-btn w-100">
+														<span class="btn-title">Question/Comment</span>
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>`;
+
+					
+				var bidDuration = parseInt(value.bid_duration); // bid duration in minutes
+				var editedTime = value.edited_time; // edited time in UTC format
+				var currentTime = moment(); // current time in the user's local timezone
+				var editedMoment = moment.utc(editedTime).local(); // convert edited time to Moment object in the user's local timezone
+				var editedTimeOnly = editedMoment.format('HH:mm:ss'); // extract time from the edited time
+				var endTime = moment(editedTimeOnly, 'HH:mm:ss').add(bidDuration, 'minutes'); // add bid duration to the extracted time
+				var remainingMinutes = endTime.diff(currentTime, 'minutes');
+				var remainingSeconds = endTime.seconds();
+					console.log(editedMoment.isSame(moment(), 'day'))
+				// Check if the edited time is on the current date
+				if (editedMoment.isSame(moment(), 'day')) {
+					var currentTime = moment(); // current time in the user's local timezone
+					var editedTimeOnly = editedMoment.format('HH:mm:ss'); // extract time from the edited time
+					var endTime = moment(editedTimeOnly, 'HH:mm:ss').add(bidDuration, 'minutes'); // add bid duration to the extracted time
+					var remainingMinutes = endTime.diff(currentTime, 'minutes');
+					var remainingSeconds = endTime.diff(currentTime, 'seconds') % 60;
+
+					var interval = setInterval(function() {
+						if (remainingMinutes >= 0 && remainingSeconds >= 0) {
+						if (remainingSeconds === 0 && remainingMinutes > 0) {
+							remainingMinutes--;
+							remainingSeconds = 59;
+						} else if (remainingSeconds > 0) {
+							remainingSeconds--;
+						}
+
+						var remainingTimeText = remainingMinutes + " : " + remainingSeconds;
+						$('.bid_duration_'+id).text(remainingTimeText);
+						} else {
+							var interval = setInterval(function() {
+								$('.main_area_'+id).addClass('d-none');		
+								$('.main_area_'+id).hide();
+								$('.no-connected').removeClass('d-none');
+								$('.no-connected').addClass('d-block')
+							}, 1000);
+						}
+					}, 1000);
+				} else {
+					var interval = setInterval(function() {
+				}, 1000);
+
+				}
+
+				// Function to generate a random number between min and max
+					function getRandomNumber(min, max) {
+					return Math.random() * (max - min) + min;
+					}
+					$(document).ready(function() {
+					var currentPrice = admin_min_price;
+
+					var interval = setInterval(function() {
+						// Add random number to the current price
+						var randomNumber = getRandomNumber(0, 1);
+						currentPrice += randomNumber;
+
+						// Log the current price
+						$('.currentPrice_'+id).text(currentPrice.toFixed(2))
+						// Check if the current price reaches or exceeds the max price
+						if (currentPrice >= admin_max_price) {
+						clearInterval(interval);
+						$('.currentPrice_'+id).text(admin_max_price)
+						}
+					}, 2000); // Interval in milliseconds (change as desired)
+					});
+
+				})
+				
+			}
+			else {
+			return_data +=	`<div class="tabs-block col-12 wow">
+						<div class="inner-box">
+							<div class="px-4 py-3 text-center">
+									<label class="text-dark ps-2">Connected</label><br>
+									<label class="text-dark ps-2">There are no active auctions.
+									</label>
+							</div>
+						</div>
+					</div>`
+				}
+		}
+
+		 if (response_data !== 0) {
+
+			$.each(response.data['complete'], function (index, value) {
+			   var bid_status_icon = '';
+			   if (value.vehicle_type == 1) {
+				  vehicle_type_value = 'Estate';
+			   } else {
+				  vehicle_type_value = 'Van';
+			   }
+			   var companyIDToCheck = parseInt(user_id); // Enter the company ID you want to check
+			   var reservationBidIDs = value.reservation_bid_id;
+			   var BidIDs="";
+			   if (reservationBidIDs[0]) {
+					BidIDs=reservationBidIDs[0].id;
+                    console.log(BidIDs);
+                }
+			   var edited_time = value.edited_time;
+			   var edited_time = moment(edited_time);
+			   var currentDate = moment();
+			   var currentformattedDate = currentDate.format('DD-MM-YYYY');
+			   var formattedDate = edited_time.format("dddd, MMMM D, YYYY");
+			   var formattedDatRide = edited_time.format("dddd, MMMM D, YYYY");
+			   var edited_time_formated = edited_time.format('DD-MM-YYYY'); 
+			   var driver_comment = value.driver_comment;
+			   var date = moment(value.pickup_date);
+			   var pickup_time_formated = date.format("MMMM D");
+			   var pickup_time = moment(value.pickup_time, "HH:mm:ss").format("hh:mm A");
+			   var admin_min_price = value.admin_min_price;
+			   var admin_max_price = value.admin_max_price;
+			   var currentPrice = admin_min_price;
+			   var id = value.id;
+			   var vehicle_type_text="";
+			   
+			   if (driver_comment == "") {
+				  driver_comment = "No Comment";
+			   }
+			   var isFound = reservationBidIDs.some(function (bid) {
+				  return bid.company === companyIDToCheck;
+			   });
+
+			   if (value.vehicle_type==1)
+				 {
+					vehicle_type_text="Estate";
+				 }
+			    else
+			     {
+				    vehicle_type_text="Van";
+			     }  			
+												
+			if (isFound) {
+				   bid_status = 'd-none';
+				  reservation_class = '';
+			   } else {
+				  bid_status = 'd-block';
+				  reservation_class = 'reservation_bid';
+			   }
+
+		return_data +=` <div class="inner-box mb-4">
+                                <div class="content-box p-4">
+								    <div class="ridedetail-card">	
+										<div class="ridedetail-header">
+											 <div class="ridedetails">
+												<p class="title">${formattedDatRide}</p>
+											  </div>
+											  <div class="text-dark">
+												<label>E2QEU5BD</label>
+											   </div>
+										</div>
+										  <hr>
+										<div class="ridedetail-body row pt-2">
+											<div class="col">`;
+											$.each(reservation_location_id, function (index, value) {	
+												if (value.from_postal) {
+													return_data +=`<div class="d-flex mb-3">`;
+														if (index == 0) {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt">${pickup_time_formated}</span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														}
+														if (index == 0) {
+															return_data +=`<div class="address">
+																<p class="mb-0">
+																	<span class="label">${value.from_postal}</span>
+																	<span class="address-txt">${value.from_postal}</span>
+																</p>
+															</div>`
+														}
+														return_data +=`</div>`
+												}
+												if (value.to_postal) {
+													return_data +=`<div class="d-flex mb-3">`;
+														if (index == 1) {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt">${pickup_time}</span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														} else {
+															return_data +=`<div class="time">
+																<p class="mb-0 d-flex align-items-center">
+																	<span class="time-txt"></span>
+																	<i class="fa fa-dot-circle"></i>
+																</p>
+															</div>`;
+														}
+														return_data +=`<div class="address">
+																<p class="mb-0">
+																	<span class="label">${value.to_postal}</span>
+																	<span class="address-txt">${value.to_postal}</span>
+																</p>
+															</div>
+														</div>`
+												}
+												})
+												return_data +=`</div>
+											<div class="col text-end">
+												<a href="javascript:;" class="theme-btn btn-style-one small-btn m-0">
+													<span class="btn-title">${vehicle_type_text}</span>
+												 </a>
+											</div>
+										</div>
+										<span class="border-h-dashed"></span>
+										<div class="ridedetail-body row">
+											<div class="col">
+												<div class="my-3">
+													<div class="icon-list">
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-plane"></i>
+															</div>
+															<span>${value.flight_number}</span>
+														</div>
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-suitcase"></i>
+															</div>
+															<span>${value.no_of_bags} small checked bags</span>
+														</div>
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-suitcase"></i>
+															</div>
+															<span>${value.no_of_hand_bags}  pieces of hand luggage</span>
+														</div>
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-users"></i>
+															</div>
+															<span>${value.total_passenger} persons</span>
+														</div>
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-money-bill-wave"></i>
+															</div>
+															<span>${value.reservation_price}													</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col border-v-dashed">
+												<div class="my-4">
+													<div class="icon-list">
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-phone"></i>
+															</div>
+															<span>${value.phone_number}</span>
+														</div>
+														<div class="d-flex">
+															<div class="icon">
+																<i class="fa fa-user"></i>
+															</div>
+															<span>${value.name}</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<span class="border-h-dashed"></span>
+										<div class="col">
+											<div class="my-3">
+												<div class="icon-list">
+													<div class="d-flex">
+														<div class="icon">
+															<i class="fa fa-comments"></i>
+														</div>
+														<span>Note: Correct telephone number: 0618365662 Please call this number!</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<span class="border-h-dashed"></span>
+										<div class="ridedetail-body mt-1 row g-2">
+											<div class="col">
+												<a href="tel:+31231312302" class="theme-btn btn-style-one small-btn w-100">
+													<span class="btn-title">Call Customer</span>
+												</a>
+											</div>
+											<div class="col">
+												<a href="javascript:;" reservation_id="${id}"  bid_id="${BidIDs}" class="theme-btn btn-style-one small-btn w-100 rides_popup">
+													<span class="btn-title">Return Ride</span>
+												</a>
+											</div>
+											<div class="col">
+												<a href="javascript:;" class="theme-btn btn-style-one small-btn w-100">
+													<span class="btn-title">Question/Comment</span>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>`;
+
+				
+			   var bidDuration = parseInt(value.bid_duration); // bid duration in minutes
+			   var editedTime = value.edited_time; // edited time in UTC format
+			   var currentTime = moment(); // current time in the user's local timezone
+			   var editedMoment = moment.utc(editedTime).local(); // convert edited time to Moment object in the user's local timezone
+			   var editedTimeOnly = editedMoment.format('HH:mm:ss'); // extract time from the edited time
+			   var endTime = moment(editedTimeOnly, 'HH:mm:ss').add(bidDuration, 'minutes'); // add bid duration to the extracted time
+			   var remainingMinutes = endTime.diff(currentTime, 'minutes');
+			   var remainingSeconds = endTime.seconds();
+				 console.log(editedMoment.isSame(moment(), 'day'))
+			 // Check if the edited time is on the current date
+			 if (editedMoment.isSame(moment(), 'day')) {
+				 var currentTime = moment(); // current time in the user's local timezone
+				 var editedTimeOnly = editedMoment.format('HH:mm:ss'); // extract time from the edited time
+				 var endTime = moment(editedTimeOnly, 'HH:mm:ss').add(bidDuration, 'minutes'); // add bid duration to the extracted time
+				 var remainingMinutes = endTime.diff(currentTime, 'minutes');
+				 var remainingSeconds = endTime.diff(currentTime, 'seconds') % 60;
+
+				 var interval = setInterval(function() {
+					 if (remainingMinutes >= 0 && remainingSeconds >= 0) {
+					 if (remainingSeconds === 0 && remainingMinutes > 0) {
+						 remainingMinutes--;
+						 remainingSeconds = 59;
+					 } else if (remainingSeconds > 0) {
+						 remainingSeconds--;
+					 }
+
+					 var remainingTimeText = remainingMinutes + " : " + remainingSeconds;
+					 $('.bid_duration_'+id).text(remainingTimeText);
+					 } else {
+						 var interval = setInterval(function() {
+							 $('.main_area_'+id).addClass('d-none');		
+							 $('.main_area_'+id).hide();
+							 $('.no-connected').removeClass('d-none');
+							 $('.no-connected').addClass('d-block')
+						 }, 1000);
+					 }
+				 }, 1000);
+			 } else {
+				 var interval = setInterval(function() {
+			 }, 1000);
+
+			 }
+
+			 // Function to generate a random number between min and max
+				 function getRandomNumber(min, max) {
+				 return Math.random() * (max - min) + min;
+				 }
+				 $(document).ready(function() {
+				 var currentPrice = admin_min_price;
+
+				 var interval = setInterval(function() {
+					 // Add random number to the current price
+					 var randomNumber = getRandomNumber(0, 1);
+					 currentPrice += randomNumber;
+
+					 // Log the current price
+					 $('.currentPrice_'+id).text(currentPrice.toFixed(2))
+					 // Check if the current price reaches or exceeds the max price
+					 if (currentPrice >= admin_max_price) {
+					 clearInterval(interval);
+					 $('.currentPrice_'+id).text(admin_max_price)
+					 }
+				 }, 2000); // Interval in milliseconds (change as desired)
+				 });
+		 
+			})
+		 }
+		 
+		 else {
+			if (get_user_level == 1) {
+			 return_data +=	`<div class="tabs-block col-12 wow">
+						 <div class="inner-box">
+							 <div class="px-4 py-3 text-center">
+									 <label class="text-dark ps-2">Connected</label><br>
+									 <label class="text-dark ps-2">There are no active auctions.
+									 </label>
+							 </div>
+						 </div>
+					 </div>`
+				}
+		 }
+	  }
+	  $('.return_data_current_rides').append(return_data);
+	//  $('.return_data_expire_rides').append(return_data_expire)
+	  
+   } catch (err) {
+	  console.log(err);
+   }
+}
+})
+
+
+$(document).on('click','.caluculate_free', function(e){
+
+	
+})
+
+</script>
+{% endblock %}

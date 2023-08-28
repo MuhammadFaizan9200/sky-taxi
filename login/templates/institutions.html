@@ -1,0 +1,623 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+			<!--Register page-->
+			<section class="tabs-section">
+				<div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>My Account</h2>
+					</div>
+					<div class="row justify-content-center">
+						<!-- Register Card -->
+						<div class="tabs-block col-xl-4 col-lg-4 col-md-4 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+								<div class="content-box p-3">
+									<div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+										<button class="nav-link active" id="account-tab" data-bs-toggle="pill" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="true">
+											My account
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="contact-tab" data-bs-toggle="pill" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">
+											Contact details
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="company-tab" data-bs-toggle="pill" data-bs-target="#company" type="button" role="tab" aria-controls="company" aria-selected="false">
+											Company
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="transportation-tab" data-bs-toggle="pill" data-bs-target="#transportation" type="button" role="tab" aria-controls="transportation" aria-selected="false">
+											Transportation options
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="municipalities-tab" data-bs-toggle="pill" data-bs-target="#municipalities" type="button" role="tab" aria-controls="municipalities" aria-selected="false">
+											Municipalities
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="airports-tab" data-bs-toggle="pill" data-bs-target="#airports" type="button" role="tab" aria-controls="airports" aria-selected="false">
+											Airports
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="vehicle-tab" data-bs-toggle="pill" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="false">
+											Vehicle
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="notifications-tab" data-bs-toggle="pill" data-bs-target="#notifications" type="button" role="tab" aria-controls="notifications" aria-selected="false">
+											Notifications
+											<i class="fa fa-angle-right"></i>
+										</button>
+										<button class="nav-link" id="payment-tab" data-bs-toggle="pill" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">
+											Payment details
+											<i class="fa fa-angle-right"></i>
+										</button>
+									  </div>
+								</div>
+							</div>
+						</div>
+						<div class="tabs-block col-xl-8 col-lg-8 col-md-8 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+								<div class="content-box">
+									<form method="post" class="company_form" novalidate>
+									<div class="tab-content" id="v-pills-tabContent">
+										<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+										
+											<div class="sec-title mb-4">
+												<span class="sub-title">Account information</span>
+												<p class="mb-0">Change your account details below.</p>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">First name</label>
+												<input class="form-control first_name" type="text" placeholder="Enter First name" name="first_name" value="{{first_name}}" required>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Last name</label>
+												<input class="form-control last_name required" type="text" placeholder="Enter Last name" name="last_name" value="{{last_name}}" required >
+											</div>
+											<div class="mt-4 text-end">
+												<button type="button" class="theme-btn btn-style-one small-btn account_info_btn">
+													Next one
+												</button>
+											</div>
+										
+										</div>
+										<div class="tab-pane fade contact" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Email addresses</span>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Ride available mails</label>
+												<input class="form-control ride_available_emails" type="email" placeholder="Enter mail@example.nl" name="ride_available_emails" value="{{ride_available_emails}}" required>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Confirmation and Trip Change emails</label>
+												<input class="form-control confirmation_and_tips_charge_emails" type="email" placeholder="Enter mail@example.nl" name="confirmation_and_tips_charge_emails" value="{{confirmation_and_tips_charge_emails}}" required>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Invoice emails</label>
+												<input class="form-control invoice_emails" type="email" placeholder="Enter mail@example.nl" name="invoice_emails" value="{{invoice_emails}}" required>
+											</div>
+											<hr/>
+											<div class="sec-title mb-4">
+												<span class="sub-title">Phone numbers</span>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Number for customer</label>
+												<p class="lh-sm mb-1">This is the number the customer is given to reach you.</p>
+												<input class="form-control number_for_customer" type="text" placeholder="Enter phone number" name="number_for_customer" value="{{number_for_customer}}" required>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Private phone number for fast taxi</label>
+												<p class="lh-sm mb-1">We will not communicate this number directly to the customer, but we use it if we want to reach you.</p>
+												<input class="form-control required" type="text" placeholder="Enter phone number" name="" value="{{private_phone_number_for_fast_taxi}}">
+											</div>
+											<div class="form-check my-4">
+												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+												<label class="ps-2 text-dark">Skybluetaxi can contact me by phone for unauctioned rides.</label>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Mobile number for SMS</label>
+												<p class="lh-sm mb-1">We will send urgent requests via SMS to this number for journeys that are booked within 24 hours.</p>
+												<input class="form-control mobile_number_for_sms_number" type="text" placeholder="Enter phone number" name="mobile_number_for_sms_number" value="{{mobile_number_for_sms_number}}" required>
+												</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn contact_details_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="company" role="tabpanel" aria-labelledby="company-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Company details</span>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Company Name</label>
+												<input class="form-control company_name" type="text" placeholder="Enter Company Name" name="company_name" value="{{company_name}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Chamber of Commerce number</label>
+												<input class="form-control chamber_of_commerce_number" type="text" placeholder="Enter Chamber of Commerce number" name="chamber_of_commerce_number" value="{{chamber_of_commerce_number}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Passenger transport number</label>
+												<input class="form-control passenger_transport_number" type="text" placeholder="Enter Passenger transport number" name="passenger_transport_number" value="{{passenger_transport_number}}">
+											</div>
+											<hr/>
+											<div class="my-2">
+												<label class="text-dark">Zipcode City</label>
+												<div class="row">
+													<div class="col-4">
+														<input class="form-control zip" type="text" placeholder="Enter ZipCode" name="zip" value="{{zip}}">
+													</div>
+													<div class="col-8">
+														<input class="form-control city" type="text" placeholder="Enter City" name="city" value="{{city}}">
+													</div>
+												</div>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">House Number / Addition</label>
+												<div class="row">
+													<div class="col-4">
+														<input class="form-control house_number" type="text" placeholder="Enter House Number" >
+													</div>
+													<div class="col-8">
+														<input class="form-control house_number_adition" type="text" placeholder="Enter House Number Addition" >
+													</div>
+												</div>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Street/Postal Code</label>
+												
+												<div class="row">
+													<div class="col-4">
+														<input class="form-control street" type="text" placeholder="Enter Street" name="street" value="{{street}}">
+													</div>
+													<div class="col-8">
+														<input class="form-control postal_code" type="text" placeholder="Enter Postal Code" value="{{postal_code}}">
+													</div>
+												</div>
+											</div>
+											<hr/>
+											<div class="sec-title mb-4">
+												<span class="sub-title">Contact</span>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">First name</label>
+												<input class="form-control contact_first_name" type="text" placeholder="Enter First name" value="{{first_name}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Last name</label>
+												<input class="form-control contact_last_name" type="text" placeholder="Enter Last name" value="{{last_name}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Function</label>
+												<input class="form-control contact_function" type="text" placeholder="Enter Function" >
+											</div>
+											<div class="my-2">
+												<label class="text-dark">E-mail Address</label>
+												<input class="form-control contact_email" type="email" placeholder="Enter mail@example.nl" >
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Phone number</label>
+												<input class="form-control contact_phone_number" type="text" placeholder="Enter Phone number">
+											</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn company_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="transportation" role="tabpanel" aria-labelledby="transportation-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Destinations</span>
+											</div>
+											<div class="my-2">
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Airport transportation</label>
+														<p>Rides from airports in the Netherlands, Belgium and Germany. Select at 'Airports' from which airports you want to receive rides to certain provinces.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input airport_transportation" type="checkbox" {% if airport_transportation.value == 1 %}checked{% endif %} value="{{airport_transportation}}" id="flexCheckDefault" name="airport_transportation" >
+															<input type="hidden" class="airport_transportation" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">A to B transport</label>
+														<p>Rides to and from locations in the Netherlands. Select at 'Municipalities' from and to which municipalities you want to receive journey requests.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input a_to_b_transport" type="checkbox" name="a_to_b_transport" {% if a_to_b_transport.value == 1 %}checked{% endif %} value="{{a_to_b_transport}}" value="{{a_to_b_transport}}" id="flexCheckDefault">
+															<input type="hidden" class="a_to_b_transport" value="0">
+														</div>
+													</div>
+												</div>
+												<hr/>
+												<div class="sec-title mb-4">
+													<span class="sub-title">Kind of taxi</span>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Speed</label>
+														<p>Receive ride requests that happen within 24 hours.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input speed" type="checkbox"  name="speed" {% if speed.value == 1 %}checked{% endif %} value="{{speed}}" id="flexCheckDefault">
+															<input type="hidden" class="speed" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Station wagon</label>
+														<p>Receive trip requests that must be driven with a station wagon.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input station_wagon" type="checkbox" name="station_wagon" {% if station_wagon.value == 1 %}checked{% endif %} value="{{station_wagon}}" id="flexCheckDefault">
+															<input type="hidden" class="station_wagon" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Bus</label>
+														<p>Receive ride requests that need to be driven with a taxi bus.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input bus" type="checkbox" name="bus" {% if bus.value == 1 %}checked{% endif %} value="{{bus}}" id="flexCheckDefault">
+															<input type="hidden" class="bus" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Luxury</label>
+														<p>Receive ride requests to be driven in a luxury car by a driver in a suit.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input luxury" type="checkbox" name="luxury" {% if luxury.value == 1 %}checked{% endif %} value="{{luxury}}" id="flexCheckDefault">
+															<input type="hidden" class="luxury" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Electric</label>
+														<p>Receive trip requests that need to be driven with an electric car.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input electric" type="checkbox" name="electric" {% if electric.value == 1 %}checked{% endif %} value="{{electric}}" id="flexCheckDefault">
+															<input type="hidden" class="electric" value="0">
+														</div>
+													</div>
+												</div>
+												<hr/>
+												<div class="sec-title mb-4">
+													<span class="sub-title">Extra options</span>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Nameplate</label>
+														<p>Receive ride requests where the passenger needs to be picked up with a name sign.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input nameplate" type="checkbox" name="nameplate" {% if nameplate.value == 1 %}checked{% endif %} value="{{nameplate}}" id="flexCheckDefault">
+															<input type="hidden" class="nameplate" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">Baby chair</label>
+														<p>Check this option if you have a baby seat suitable for a child from 0 to 13 kg.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input baby_chair" type="checkbox" name="baby_chair" {% if baby_chair.value == 1 %}checked{% endif %} value="{{baby_chair}}" id="flexCheckDefault">
+															<input type="hidden" class="baby_chair" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">High chair</label>
+														<p>Check this option if you have a high chair, suitable for a child from 9 to 18 kg.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input high_chair" type="checkbox" name="high_chair" {% if high_chair.value == 1 %}checked{% endif %} value="{{high_chair}}" id="flexCheckDefault">
+															<input type="hidden" class="high_chair" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="row bg-detail-section">
+													<div class="col-10">
+														<label class="text-dark">TX hallmark</label>
+														<p>Check this option if your taxi company has the TX quality mark.</p>
+													</div>
+													<div class="col-2 align-self-center text-center">
+														<div class="form-check justify-content-center">
+															<input class="form-check-input tx_hallmark" type="checkbox" name="tx_hallmark" {% if tx_hallmark.value == 1 %}checked{% endif %} value="{{tx_hallmark}}" id="flexCheckDefault">
+															<input type="hidden" class="tx_hallmark" value="0">
+														</div>
+													</div>
+												</div>
+												<div class="mt-4 d-flex justify-content-between">
+													<a href="#" class="theme-btn btn-style-one small-btn">
+														<span class="btn-title">Previous</span>
+													</a>
+													<button type="button" class="theme-btn btn-style-one small-btn transportation_btn">
+														Next one
+													</button>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="municipalities" role="tabpanel" aria-labelledby="municipalities-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Municipalities</span>
+												<p class="mb-0">Below you can select from and to which municipalities you want to receive ride requests.</p>
+											</div>
+											<div class="row">
+												<div class="col-6">
+													<div class="error-page__inner">
+													<div class="error-page__form m-0">
+														<div class="error-page__form-input">
+															<input type="search" placeholder="Find a municipality..." >
+															<button type="submit"><i class="lnr lnr-icon-magnifier"></i></button>
+														</div>
+													</div>
+													</div>
+												</div>
+												<div class="col-6 ">
+													<select class="form-control province">
+														<option value="0">Filter by province...</option>
+														<option name="province"  value="1">province</option>
+													  </select>
+												</div>
+											</div>
+											<div class="row col-mt-0 mt-4 g-2">
+												<div class="spinner-border text-danger spinner_temparary_class" style="display: 
+												none;" role="status">
+													<span class="sr-only">Loading...</span>
+												</div>
+											</div>
+											<div class="row col-mt-0 mt-4 g-2 fetch_provinces">
+												<!-- <div class="col-4">
+													<p class="select-box active">Ah and hunze</p>
+												</div> -->
+											</div>
+											<hr/>
+											<!-- <div class="sec-title mb-4">
+												<span class="sub-title">My congregations(8/40)</span>
+											</div>
+											<div class="row col-mt-0 mt-4 g-2">
+												<div class="col-4">
+													<p class="selected-box">Ah and hunze <i class="fa fa-times"></i></p>
+												</div>
+												<div class="col-4">
+													<p class="selected-box">Aalten <i class="fa fa-times"></i></p>
+												</div>
+												<div class="col-4">
+													<p class="selected-box">Alblasserdam <i class="fa fa-times"></i></p>
+												</div>
+												<div class="col-4">
+													<p class="selected-box">Albrandswaard <i class="fa fa-times"></i></p>
+												</div>
+											</div> -->
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn municipalities_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="airports" role="tabpanel" aria-labelledby="airports-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Airports</span>
+												<p class="mb-0">Below you can select from which airports you want to receive ride requests.</p>
+											</div>
+											<div class="row">
+												<div class="col-6">
+													<div class="error-page__inner">
+													<div class="error-page__form m-0">
+														<div class="error-page__form-input">
+															<input type="search" placeholder="Find an airport..." value="">
+															<button type="submit"><i class="lnr lnr-icon-magnifier"></i></button>
+														</div>
+													</div>
+													</div>
+												</div>
+												<div class="col-6 ">
+													<select class="form-control">
+														<option>Filter by country...</option>
+														<option>Germany</option>
+														<option>The Netherlands</option>
+														<option>Belgium</option>
+													  </select>
+												</div>
+												
+											</div>
+											<div class="row col-mt-0 mt-4 g-2 get_airpots">
+
+										
+												
+												
+
+											
+											</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn airports_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
+											<div class="wrapper-1">	
+											<div class="addvehicleform">
+													<div class="sec-title mb-0 d-flex align-items-center justify-content-between">
+														<span class="sub-title">Vehicle</span>
+														<div class="vehicle-sec-add py-2">
+															<span class="text-dark">Remove</span>
+															<div class="vehicle-remove-btn"><i class="icon fa fa-times"></i></div> 
+														</div>
+													</div>
+													<div class="my-2">
+														<label class="text-dark">Vehicle Type</label>
+														<select class="form-control vehicle_type">
+															<option>Select Type</option>
+															<option>Sedan</option>
+															<option>Estate</option>
+															<option>Bus</option>
+															<option>Electric</option>
+														</select>
+													</div>
+													<div class="row">
+														<div class="col-6">
+														<div class="my-2">
+															<label class="text-dark">Vehicle Year</label>
+															<input class="form-control vehicle_year" type="text" placeholder="Enter Vehicle Year" name="vehicle_year" required>
+														</div>
+														</div>
+														<div class="col-6">
+														<div class="my-2">
+															<label class="text-dark">Vehicle NumberPlate</label>
+															<input class="form-control Vehicle vehicle_number_plate" type="text" placeholder="Enter Vehicle NumberPlate" name="numberplate" required>
+														</div>
+														</div>
+													</div>
+													<hr>
+											</div>
+											<div class="add_vehicle"></div>
+											</div>
+											<div id="addvehicle" class="vehicle-sec-add py-2">
+												<div class="vehicle-add-btn"><i class="icon fa fa-plus"></i></div> 
+												<span class="text-dark">Add More Vehicle</span>
+											</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn vehicle_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">New rides</span>
+												<p class="mb-0">Receive notifications for new arrivals.</p>
+											</div>
+											<div class="row bg-detail-section">
+												<div class="col-10">
+													<label class="text-dark">Emails</label>
+												</div>
+												<div class="col-2 align-self-center text-center">
+													<div class="form-check justify-content-center">
+														<input class="form-check-input email_notification" type="checkbox"  name="email_notification" {% if email_notification.value == 1 %}checked{% endif %} value="{{email_notification}}" id="flexCheckDefault">
+														<input class="form-check-input email_notification" type="hidden" value="0" id="flexCheckDefault">
+													</div>
+												</div>
+											</div>
+											<div class="row bg-detail-section">
+												<div class="col-10">
+													<label class="text-dark">App notification</label>
+												</div>
+												<div class="col-2 align-self-center text-center">
+													<div class="form-check justify-content-center">
+														<input class="form-check-input app_notification" name="app_notification" type="checkbox" {% if app_notification.value == 1 %}checked{% endif %} value="{{app_notification}}" id="flexCheckDefault">
+														<input class="form-check-input app_notification" type="hidden" id="flexCheckDefault">
+													</div>
+												</div>
+											</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="button" class="theme-btn btn-style-one small-btn notifications_btn">
+													Next one
+												</button>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+											<div class="sec-title mb-4">
+												<span class="sub-title">Payment details</span>
+											</div>
+											<div class="my-2">
+												<label class="text-dark">Name of Account Holder</label>
+												<input class="form-control name_of_account_holder" type="text" placeholder="Enter Name of Account Holder" value="{{name_of_account_holder}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">IBAN</label>
+												<input class="form-control iban" type="text" placeholder="Enter IBAN" value="{{iban}}">
+											</div>
+											<div class="my-2">
+												<label class="text-dark">VAT Number</label>
+												<input class="form-control vat_number" type="text" placeholder="Enter VAT Number" value="{{vat_number}}">
+											</div>
+											<div class="mt-4 d-flex justify-content-between">
+												<a href="#" class="theme-btn btn-style-one small-btn">
+													<span class="btn-title">Previous</span>
+												</a>
+												<button type="submit" class="theme-btn btn-style-one small-btn complete_save">
+													Save
+												</button>
+											</div>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--End Register page-->
+
+{% endblock %}
+{% block external_js %}
+<script type="text/javascript" src="{% static 'js/api/institutions.js' %}"></script>
+<script>
+var airport_keys="{{airports}}";
+  setTimeout(function() {
+					
+$('.view_airports').each(function() {
+    var id = $(this).attr('id');
+    if (airport_keys.includes(id.toString())) {
+      // Show the corresponding div with matching class
+      $('.airpot_id_' + id.replace(/\s/g, '')).show();  // Remove whitespace from the ID value
+	  $('.airpot_id_' + id.replace(/\s/g, '')).addClass('active');
+    } else {
+      // Hide the div if it doesn't match
+      $('.airpot_id_' + id.replace(/\s/g, '')).hide();  // Remove whitespace from the ID value
+    }
+  });
+}, 2000);
+
+</script>
+{% endblock %}

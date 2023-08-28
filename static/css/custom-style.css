@@ -1,0 +1,515 @@
+/* Custom Styles Css */
+
+.header-top {
+  margin-left: 264px;
+}
+.main-menu .navigation > li > a {
+  text-transform: capitalize;
+}
+.why-choose-us.pull-up {
+  padding: 120px 0 120px;
+  margin-top: 0;
+}
+.work-section {
+  padding: 60px 0 0px;
+}
+.work-section .icon-dotted-map-2 {
+  top: 0px;
+}
+.features-section {
+  padding: 0px 0 90px;
+}
+.login-btn {
+  min-width: 128px !important;
+}
+.form-check{
+  display: flex;
+  align-items: center;
+}
+.form-check-input {
+  width: 1.2em;
+  height: 1.2em;
+  margin-top: 0.15em;
+}
+.form-check-input:checked {
+  background-color: #ca1f26;
+  border-color: #ca1f26;
+}
+.form-check-input:focus {
+  box-shadow: none;
+}
+.main-menu .navbar-collapse {
+  display: flex;
+}
+.sticky-header .main-menu .navigation > li {
+  margin-left: 25px;
+}
+.form-control, .input-text {
+  height: calc(2rem + 22px);
+  padding: 14px 22px;
+}
+.tabs-section {
+  position: relative;
+  padding: 90px 0 90px;
+  z-index: 1;
+}
+.tabs-section .bg-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-height: 454px;
+}
+.tabs-section .bg-image:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-theme-color4);
+  opacity: 0.9;
+  content: "";
+}
+.tabs-section .anim-icons {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+}
+.tabs-section .icon-wave-line {
+  left: -620px;
+  bottom: -90px;
+}
+/* Custom register Css */
+.register-block{
+  position: relative;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+.register-block .inner-box {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  -webkit-box-shadow: 0 3px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.05);
+}
+.register-block .content-box {
+  position: relative;
+  padding: 20px 30px 35px;
+  background-color: #ffffff;
+}
+/* Custom Tabs Css */
+.tabs-block{
+  position: relative;
+  margin-bottom: 30px;
+  z-index: 1;
+}
+.tabs-block .inner-box {
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all 300ms ease;
+  transition: all 300ms ease;
+  -webkit-box-shadow: 0 3px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.05);
+}
+.tabs-block .content-box {
+  position: relative;
+  padding: 1.8rem 2rem;
+  background-color: #ffffff;
+}
+
+/* Tabs styles*/
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #d70006;
+}
+.nav-link {
+  color: #232331;
+}
+.nav-link:focus, .nav-link:hover {
+  color: #d70006;
+  background-color: #f8f5f1;
+}
+.nav-pills .nav-link {
+  text-align: left;
+  padding: 1rem 1.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+.small-btn {
+  padding: 12px 22px;
+}
+.bg-detail-section {
+  background-color: #f4f5f8;
+  border-radius: 4px;
+  padding: 10px 10px 15px 8px;
+  margin-bottom: 15px;
+}
+.bg-detail-section p{
+  margin-bottom: 0px;
+  line-height: 1.4;
+}
+.error-page__inner .error-page__form input[type=search] {
+  padding-left: 20px;
+  padding-right: 15px;
+  height: 54px;
+  background-color: #f4f5f8;  
+  border-radius: 4px;
+}
+.error-page__inner .error-page__form button[type=submit] {
+  width: 40px;
+}
+.select-box {
+  padding: 8px 14px 14px;
+  border: 1px solid #d5d3d3;
+  border-radius: 4px;
+  margin-bottom: 0px;
+  color: #232331;
+  font-weight: 500;
+  line-height: 1.5;
+  height: calc(100% - 0.4rem);
+}
+.select-box:hover {
+  border: 1px solid #d70006;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+.select-box.active {
+  border: 1px solid #d70006;
+  background-color: #d70006;
+  color: #fff;
+  cursor: pointer;
+}
+.selected-box{
+  border: 1px solid #d70006;
+  background-color: #d70006;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 14px 14px;
+  border-radius: 4px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: space-between;
+  line-height: 1.5;
+  height: calc(100% - 0.4rem);
+}
+.col-mt-0 .col-4{
+  margin-top: 0px;
+}
+
+.user-btn .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 240px;
+  overflow: auto;
+  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.05), -2px 0px 5px 1px rgba(0, 0, 0, 0.05);
+  right: 20px;
+  top: 50px;
+  z-index: 1;
+}
+.user-btn .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  border-bottom: 1px solid #ebf1f5;
+  display: flex;
+  justify-content: space-between;
+}
+.user-btn a i {
+  align-self: center;
+}
+.user-btn .show {
+  display: block;
+}
+	
+/* --- Vehicle add and remove section --- */
+
+.vehicle-sec-add {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+.vehicle-add-btn {
+  background-color: #ca1f26;
+  width: 26px;
+  height: 26px;
+  margin-right: 12px;
+  border-radius: 50px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.vehicle-add-btn i {
+  padding: 6px;
+}
+.vehicle-remove-btn{
+  background-color: #ca1f26;
+  width: 26px;
+  height: 26px;
+  margin-left: 12px;
+  border-radius: 50px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.vehicle-remove-btn i {
+  padding: 8px;
+}
+
+.contact-form {
+  padding: 25px 50px 50px;
+}
+/* --- Vehicle hint icon --- */
+.vehicle-hint{
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  color: #ca1f26;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.vehicle-hint-btn i{
+  padding: 6px;
+}
+
+.add-more{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+.add-more-btn{
+  background-color: #fff;
+  width: 26px;
+  height: 26px;
+  margin-right: 12px;
+  border-radius: 50px;
+  color: #ca1f26;
+  display: flex;
+  align-items: center;
+}
+.add-more-btn i{
+  padding: 6px;
+}
+
+.tbl-shopping-cart th, .tbl-shopping-cart td{
+  padding: 15px !important;
+}
+
+/* Custom Available Rides */
+
+.labeltag {
+  color: #fff;
+  background: #ca1f26;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 3px;
+}    
+.ridelocation-box{
+    padding: 12px 16px;
+    border: 1px solid #d5d3d3;
+    border-radius: 4px;
+    margin-bottom: 0px;
+    color: #232331;
+    font-weight: 500;
+    line-height: 1.5;
+    height: calc(100% - 0.4rem);
+    display: flex;
+    align-items: center;
+}
+.ridelocation-box:hover {
+  border: 1px solid #d70006;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+.ridelocation-btn {
+  margin: 10px 0px;
+  cursor: pointer;
+  color: #232331;
+  width: fit-content;
+}
+.ridelocation-btn:hover {
+  color: #d70006;
+}
+.locationbar {
+  color: #232331;
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 25px;
+  font-weight: 600;
+}
+.ridedetail-header {
+  display: flex;
+  justify-content: space-between;
+}
+.ridedetails .title{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #232331;
+}
+.ridedetail-body .time {
+  position: relative;
+  margin-top: 4px;
+}
+.ridedetail-body .time-txt {
+  font-size: 12px;
+  font-weight: 600;
+  color: #232331;
+  width: 65px;
+}
+.ridedetail-body .fa {
+  font-size: 14px;
+  margin: 0px 8px;
+  color: #ca1f26;
+}
+.ridedetail-body .address {
+  clear: both;
+}
+.ridedetail-body .address .label {
+  font-size: 18px;
+  display: block;
+  padding-left: 10px;
+  font-weight: 600;
+  color: #232331;
+  line-height: 1.5;
+}
+.ridedetail-body .address-txt{
+  font-size: 14px;
+  display: block;
+  padding-left: 10px;
+  font-weight: 500;
+  line-height: 1;
+}
+.ridedetail-body .fa.location{
+  font-size: 17px;
+  margin: 0px 8px 0px 10px;
+  color: #ca1f26;
+}
+.ridedetail-body .detail-lable {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ca1f27;
+  margin-top: 8px 0px;
+}
+.ridedetail-body .detail-lable span {
+  color: #232331;
+}
+.ridedetail-body .theme-btn{
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 24px;
+  margin-right: 8px;
+  margin-top: 10px;
+}
+.border-v-dashed{
+  border-left: 1px dashed #ccc;
+}
+.icon-list .icon {
+  width: 36px;
+}
+.icon-list p{
+  font-weight: 500;
+}
+
+.download-pdf {
+  width: 32px;
+  height: 32px;
+  margin: auto;
+}
+
+/* My rides custom */
+.icon-s-btn {
+  width: 38px;
+  height: 38px;
+  margin: 4px;
+  border-radius: 6px;
+  border-bottom: 4px solid;
+  background: #e6e5e5;
+  border-color: #b2b2b2;
+
+}
+.icon-s-btn.active {
+  background-color: #d70005;
+  border-bottom: 4px solid #a80004;
+}
+.icon-s-btn .fas {
+  font-size: 18px;
+  color: #fff;
+  padding: 9px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-s-btn:hover {
+  cursor: pointer;
+}
+
+.empty-time{
+  margin-top: 8px !important;
+}
+.border-h-dashed {
+  border-bottom: 1px dashed #ccc;
+  margin: 5px 0 5px 0;
+  display: block;
+}
+.icon-list .fa {
+  font-size: 14px;
+  margin: 0px 8px;
+  color: #ca1f26;
+}
+
+/* Calculate login form css */
+.tabs-content .tab .horizontal-tab {
+  background: white;
+}
+.horizontal-tab button {
+  background: #ca1f26 !important;
+}
+.product-discription .tab-btn-box .tab-btns li {
+  font-size: 16px;
+  text-transform: capitalize;
+  border-radius: 6px;
+  border: 1px solid #edeae3;
+}
+.product-discription .tab-btn-box .tab-btns li.active-btn {
+  color: #fff;
+  background-color: #d70005;
+}
+.product-discription .tab-btn-box .tab-btns li:hover {
+  color: #d70006;
+  background-color: #f8f5f1;
+}
+.product-discription .tab-btn-box:before {
+  content: "";
+  background-color: #edeae3;
+  width: 90%;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+.product-discription .tab-btn-box {
+  margin: 20px 0px 40px;
+}

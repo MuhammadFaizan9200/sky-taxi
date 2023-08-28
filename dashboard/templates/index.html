@@ -1,0 +1,540 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+			<!-- Why Choose Us -->
+			<section class="why-choose-us pull-up pb-0">
+				<div class="bg-image" style="background-image: url({%static 'images/background/4.jpg'%});"></div>
+
+				<div class="auto-container">
+					<div class="row">
+						<!-- Content Column -->
+						<div class="content-column col-lg-6 col-md-12 col-sm-12">
+							<div class="inner-column">
+								<div class="sec-title light">
+									<h2>Easily Book Your Taxi Ride</h2>
+
+									<p class="text-white fs-5 lh-sm">With a <span class="fs-3 fw-bold">9.3 score</span> the highest <br>
+										traveler appreciation of the Netherlands</p>
+
+									<h3 class="text-white lh-sm">No matter your destination,
+										we can take you there.</h3>
+
+									<p class="text-white lh-sm">Choose from standard, minibus, luxury and electric.</p>
+								</div>
+							</div>
+						</div>
+
+						<!-- form Column -->
+						<div class="form-column col-lg-6 col-md-12 col-sm-12">
+							<div class="inner-column">
+								<!-- Contact Form -->
+								<div class="contact-form wow fadeInLeft">
+									<!--Contact Form-->
+									<form method="post" action="" id="contact-form">
+										<!-- 1 step -->
+										<div class="d-block first_step">
+										<h4 class="text-white">Calculate</h4>
+										<div class="row g-2">
+											<div class="col-7 form-group mb-0">
+												<label>Passenger</label>
+												<select class="form-control total_passenger">
+													<option value="1">1 passenger</option>
+													<option value="2">2 passenger</option>
+													<option value="3">3 passenger</option>
+													<option value="4">4 passenger</option>
+													<option value="5">5 passenger</option>
+													<option value="6">6 passenger</option>
+													<option value="7">7 passenger</option>
+													<option value="8">8 passenger</option>
+												</select>
+											</div>
+
+											<div class="col-4 form-group mb-0">
+													<label>Vehicle</label>
+													<select class="form-control vehicle_type">
+														<option value="1">Estate</option>
+														<option value="2">Van</option>
+													</select>
+											</div>
+											<div class="col-1 form-group align-self-center">
+												<div class="vehicle-hint mt-4" data-bs-toggle="tooltip" data-bs-placement="left" title="A station wagon fits 4 large suitcases of 30 kg plus 4 hand luggage of 5-10 kg">
+													<div class="vehicle-hint-btn"><i class="icon fa fa-question"></i></div>
+												</div>
+											</div>
+										</div>
+										<p class="text-white lh-sm mt-3">From</p>
+										<div class="row g-2">
+											<!-- <div class="col-3 form-group mb-0">
+												<select class="form-control from_type">
+													<option value="3">Address</option>
+													<option value="2">Post Code</option>
+													<option value="1">Airport</option>
+												</select>
+											</div> -->
+											<!-- <div class="col-9 form-group mb-0 city_div">
+												<input type="text" placeholder="City" required />
+											</div> -->
+											<div class="col-7 form-group mb-0 address1_input get_from_postal_code">
+												<input type="text" class="from_addres address-input" id="address2-input" placeholder="Postal Code" required />
+											</div>
+											<!-- <div class="col-7 form-group mb-0 address1_input get_from_address_postal_code">
+												<input type="text" id="address1-input" class="from_addres" placeholder="Street address" required />
+											</div> -->
+											<div class="col-4 form-group mb-0 no_area">
+												<input type="text" placeholder="No." class="house_number_from" required />
+											</div>
+											<!-- <div class="col-8 form-group mb-0 from_airports d-none">
+												<select class="form-control from_airports_fetch">
+													<option value="0">Select Airport</option>
+												</select>
+											</div> -->
+											<div class="col-1 form-group align-self-center">
+												<div class="vehicle-hint" data-bs-toggle="tooltip" data-bs-placement="left" title="If you want to provide an extra pick-up address, you can indicate this in the comment.
+												Per additional address in the same city it costs €10 and if it is in another city it costs €20 in most cases">
+													<div class="vehicle-hint-btn"><i class="icon fa fa-question"></i></div>
+												</div>
+											</div>
+
+										</div>
+										<div class="add-more py-2 my-2 col">
+											<div class="add-more-btn add_more_address"><i class="icon fa fa-plus"></i></div>
+												<span class="text-white">Add More Addresses</span>
+											</div>
+											<div class="dynamic_address"></div>
+
+										<p class="text-white lh-sm mt-3">To</p>
+										<div class="row g-2">
+											<!-- <div class="col-3 form-group mb-0">
+												<select class="form-control to_type">
+													<option value="1">Airport</option>
+													<option value="2">Post Code</option>
+													<option value="3">Address</option>
+												</select>
+											</div> -->
+											<!-- <div class="col-8 form-group mb-0 to_airports">
+												<select class="form-control to_airports_fetch">
+													<option value="0">Select Airports</option>
+												</select>
+											</div> -->
+											<!-- <div class="col-9 form-group mb-0 to_city_div d-none">
+												<input type="text" placeholder="City" required />
+											</div> -->
+											<div class="col-7 form-group mb-0 address2_input get_to_postal_code">
+												<input type="text" class="to_address address-input" id="address3-input" placeholder="Postal Code" required />
+											</div>
+											<div class="col-7 form-group mb-0 address2_input d-none get_to_address_postal_code">
+												<input type="text" id="address2-input" class="to_address" placeholder="Street address" required />
+											</div>
+											<div class="col-4 form-group mb-0 to_no_area">
+												<input type="text" placeholder="No." class="house_number_to" required />
+											</div>
+
+											<div class="col-1 form-group align-self-center">
+												<div class="vehicle-hint" data-bs-toggle="tooltip" data-bs-placement="left" title="If you want to provide an extra pick-up address, you can indicate this in the comment.
+												Per additional address in the same city it costs €10 and if it is in another city it costs €20 in most cases">
+													<div class="vehicle-hint-btn"><i class="icon fa fa-question"></i></div>
+												</div>
+											</div>
+
+										</div>
+										<div class="col-12 form-group mt-4">
+											<button class="theme-btn btn-style-two hvr-light caluculate_free" type="button" name="submit-form"><span class="btn-title"> Calculate fare</span></button>
+										</div>
+										</div>
+										<!-- 2 step -->
+										<div class="second_step d-none">
+											<h4 class="text-white">Your Fare</h4>
+											<div class="row ">
+												<div class="col">
+													<h4 class="text-white my-2">Price</h4>
+												</div>
+												<div class="col">
+													<h4 class="text-white text-end fw-bold my-2 totalprice"></h4>
+													<input type="hidden" class="reservation_price">
+												</div>
+											</div>
+											<hr class="text-white">
+											<div class="row">
+												<div class="col-12 d-flex align-items-center">
+													<p class="text-white lh-sm my-2">From : </p>
+													<p class="text-white fs-5 lh-sm my-2 fw-bold text-end ms-3 get_from_location"></p>
+												</div>
+												<div class="col-12 d-flex align-items-center">
+													<p class="text-white lh-sm my-2">To : </p>
+													<p class="text-white fs-5 lh-sm my-2 fw-bold text-end ms-3 get_to_location"></p>
+												</div>
+											</div>
+											
+											<input type="hidden" class="result1">
+											<input type="hidden" class="result2">
+											<input type="hidden" class="kilometer">
+											<input type="hidden" class="from_postal_code">
+											<input type="hidden" class="to_postal_code">
+											<div class="row g-2 mt-4">
+												<div class="col-6 form-group mb-0">
+													<label>Pick Up Date</label>
+													<input class="pickup_date" type="date" required />
+												</div>
+												<div class="col-6 form-group mb-0">
+													<label>Pick Up Time</label>
+													<input class="pickup_time" type="time" required />
+												</div>
+											</div>
+											<p class="text-white lh-sm mt-3">From pick up location</p>
+											<div class="col-12 align-self-center text-center">
+												<div class="form-check">
+													<input class="form-check-input is_reutrn" type="checkbox" value="1">
+													<input class="is_reutrn" type="hidden" value="0">
+													<span class="text-white ms-2 mt-1">Book return taxi</span>
+												</div>
+											</div>
+											<div class="return_area d-none">
+												<h4 class="text-white">Return Plan</h4>
+												<div class="row g-2 mt-4">
+													<div class="col-6 form-group mb-0">
+														<label>Pick Up Date</label>
+														<input class="return_pickup_date" type="date" required  />
+													</div>
+													<div class="col-6 form-group mb-0">
+														<label>Pick Up Time</label>
+														<input class="return_pickup_time" type="time" required />
+													</div>
+												</div>
+											</div>
+											<div class="row g-2 mt-2">
+												<div class="col-12 form-group mb-0">
+													<label>Flightnumb</label>
+													<input type="text" placeholder="Outward flight" required class="flight_number" />
+												</div>
+											</div>
+											<div class="form-group mt-4">
+												<button class="theme-btn btn-style-two hvr-light btn_second_step" type="button"><span class="btn-title">Next Step </span></button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--End Contact Form -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End Why Choose Us -->
+
+			<!-- Work Section -->
+			<section class="work-section">
+				<div class="anim-icons">
+					<span class="icon icon-dotted-map-2 zoom-one"></span>
+					<span class="icon icon-plane-1 bounce-y"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="row">
+						<!-- Work Block -->
+						<div class="work-block col-lg-3 col-md-6 col-sm-12 wow fadeInRight">
+							<div class="inner-box">
+								<h4 class="title">Free cancellation <br />and changes</h4>
+							</div>
+						</div>
+
+						<!-- Work Block -->
+						<div class="work-block col-lg-3 col-md-6 col-sm-12 wow fadeInRight" data-wow-delay="300ms">
+							<div class="inner-box">
+								<h4 class="title">Always a private <br />taxi</h4>
+							</div>
+						</div>
+
+						<!-- Work Block -->
+						<div class="work-block col-lg-3 col-md-6 col-sm-12 wow fadeInRight" data-wow-delay="600ms">
+							<div class="inner-box">
+								<h4 class="title">No baggage <br />charges</h4>
+							</div>
+						</div>
+
+						<!-- Work Block -->
+						<div class="work-block col-lg-3 col-md-6 col-sm-12 wow fadeInRight" data-wow-delay="900ms">
+							<div class="inner-box">
+								<h4 class="title">Pay online <br />service</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End Work Section -->
+
+			<!-- Features Section -->
+			<section class="features-section">
+				<div class="auto-container">
+					<div class="row">
+						<!-- Feature Block -->
+						<div class="feature-block col-lg-4 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<i class="icon flaticon-logistics-delivery-6"></i>
+									<span class="count">01</span>
+								</div>
+								<div class="content-box">
+									<h4 class="title">
+										<a href="page-about.html"
+											>Competitive <br />
+											prices</a
+										>
+									</h4>
+									<div class="text">Up to 70% cheaper than meter fares. Fixed rates without any surprises.</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Feature Block -->
+						<div class="feature-block col-lg-4 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<i class="icon flaticon-fast-delivery-1"></i>
+									<span class="count">02</span>
+								</div>
+								<div class="content-box">
+									<h4 class="title">
+										<a href="page-about.html"
+											>Anywhere in<br />
+											NL</a
+										>
+									</h4>
+									<div class="text">Travel to and from any location in the Netherlands, and airports in Belgium and Germany.</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Feature Block -->
+						<div class="feature-block col-lg-4 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<i class="icon flaticon-container-2"></i>
+									<span class="count">03</span>
+								</div>
+								<div class="content-box">
+									<h4 class="title"><a href="page-about.html">Reliable</a></h4>
+									<div class="text">
+										We honor our commitment. The driver will be ready at the agreed time.</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End Features Section-->
+
+			<!-- About Section -->
+			<section class="about-section pt-0">
+				<div class="anim-icons">
+					<div class="float-image wow fadeInRight"><img src="{% static 'images/resource/float-img-1.png' %}" alt="" /></div>
+					<span class="icon icon-dots-1 bounce-x"></span>
+					<span class="icon icon-dotted-map zoom-one"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="row">
+						<div class="content-column col-lg-6 col-md-12 col-sm-12 order-2">
+							<div class="inner-column">
+								<div class="sec-title">
+									<span class="sub-title">Skybluetaxi</span>
+									<h2>Book a taxi anywhere in the Netherlands</h2>
+									<div class="text">With skybluetaxi you travel to and from any location in the Netherlands and airports in
+										Germany and Belgium. Every day the booking platform matches many travelers to one of the 5000 affiliate
+										taxi drivers. These local taxi companies have been screened on experience, quality of service and
+										required certificates. As a platform, Skybluetaxi has the TX-Keurmerk certificate: the national quality
+										mark in the taxi industry.</div>
+									<div class="text">
+										Through skybluetaxi online booking platform you can easily book a taxi to airports, healthcare facilities,
+										business appointments, festivals, hotels or day trips. You can choose from the following transport options:
+										standard, luxury transport, electric transport, wheelchair taxi or a minibus for up to eight people.
+										You are always transported in a private taxi by a certified taxi company. There are no extra costs for your luggage,
+										and you can change your ride online or cancel it free of charge up to three hours before departure.
+									</div>
+								</div>
+
+								<div class="btm-box">
+									<a href="page-about.html" class="theme-btn btn-style-one"><span class="btn-title">Explore More</span></a>
+								</div>
+							</div>
+						</div>
+
+						<!-- Image Column -->
+						<div class="image-column col-lg-6 col-md-12 col-sm-12">
+							<div class="inner-column">
+								<figure class="image-1"><img src="{% static 'images/about/about-1.png' %}" alt="" /></figure>
+								<figure class="image-2"><img src="{% static 'images/about/about-2.png' %}" alt="" /></figure>
+								<div class="experience">
+									<strong
+										><i class="icon flaticon-global"></i> 40<br />
+										Years</strong
+									>
+									Working Exprience
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--Emd About Section -->
+
+			<!-- Services Section -->
+			<section class="services-section">
+				<div class="bg-image" style="background-image: url({%static 'images/background/1.jpg'%});"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>Our Services</h2>
+					</div>
+
+					<div class="row">
+						<!-- Service Block -->
+						<div class="service-block col-xl-3 col-lg-4 col-md-6 col-sm-12 wow fadeInUp">
+							<div class="inner-box">
+								<div class="image-box">
+									<figure class="image">
+										<a href="page-service-details.html"><img src="images/resource/service-1.jpg" alt="" /></a>
+									</figure>
+								</div>
+								<div class="content-box">
+									<i class="icon flaticon-airplane-2"></i>
+									<span class="sub-title">01 Service</span>
+									<h4 class="title"><a href="page-service-details.html">Airport taxi</a></h4>
+									<div class="text">You can easily book a taxi to and from...</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-xl-3 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="300ms">
+							<div class="inner-box">
+								<div class="image-box">
+									<figure class="image">
+										<a href="page-service-details.html"><img src="images/resource/service-2.jpg" alt="" /></a>
+									</figure>
+								</div>
+								<div class="content-box">
+									<i class="icon flaticon-cargo-boat"></i>
+									<span class="sub-title">02 Service</span>
+									<h4 class="title"><a href="page-service-details.html">Local taxi services									</a></h4>
+									<div class="text">Through our website you can order a taxi from...</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-xl-3 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="600ms">
+							<div class="inner-box">
+								<div class="image-box">
+									<figure class="image">
+										<a href="page-service-details.html"><img src="images/resource/service-3.jpg" alt="" /></a>
+									</figure>
+								</div>
+								<div class="content-box">
+									<i class="icon flaticon-delivery-truck-3"></i>
+									<span class="sub-title">03 Service</span>
+									<h4 class="title"><a href="page-service-details.html">Care transport</a></h4>
+									<div class="text">We offer tailor-made care transport for people... </div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-xl-3 col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="900ms">
+							<div class="inner-box">
+								<div class="image-box">
+									<figure class="image">
+										<a href="page-service-details.html"><img src="images/resource/service-4.jpg" alt="" /></a>
+									</figure>
+								</div>
+								<div class="content-box">
+									<i class="icon flaticon-delivery-box-4"></i>
+									<span class="sub-title">04 Service</span>
+									<h4 class="title"><a href="page-service-details.html">Business transport</a></h4>
+									<div class="text">For business taxi rides, sneleentaxi is the ideal...</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End Services Section-->
+
+			<!-- Testimonial Section -->
+			<section class="testimonial-section pt-0">
+				<div class="anim-icons">
+					<span class="icon icon-bg-dots"></span>
+					<span class="icon icon-plane-2 bounce-y"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Client’s Testimonials</span>
+						<h2>Our reviews feedbacks</h2>
+					</div>
+
+					<div class="outer-box">
+						<!-- Testimonial Carousel -->
+						<div class="testimonial-carousel owl-carousel owl-theme">
+							<!-- Testimonial Block -->
+							<div class="testimonial-block">
+								<div class="inner-box">
+									<div class="content-box">
+										<div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i></div>
+										<div class="text">“All of our lorries are fitted with Satellite Tracking and Temperature Controlled monitoring systems so that the transportation of high value and temperature sensitive loads can be monitored at all times.</div>
+									</div>
+									<div class="thumb"><img src="images/resource/testi-thumb-1.jpg" alt="" /></div>
+									<span class="designation">Co Founder</span>
+									<h4 class="name">Jhon D. William</h4>
+								</div>
+							</div>
+
+							<!-- Testimonial Block -->
+							<div class="testimonial-block">
+								<div class="inner-box">
+									<div class="content-box">
+										<div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i></div>
+										<div class="text">“All of our lorries are fitted with Satellite Tracking and Temperature Controlled monitoring systems so that the transportation of high value and temperature sensitive loads can be monitored at all times.</div>
+									</div>
+									<div class="thumb"><img src="images/resource/testi-thumb-2.jpg" alt="" /></div>
+									<span class="designation">Co Founder</span>
+									<h4 class="name">Aleesha Brown</h4>
+								</div>
+							</div>
+
+							<!-- Testimonial Block -->
+							<div class="testimonial-block">
+								<div class="inner-box">
+									<div class="content-box">
+										<div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-alt"></i></div>
+										<div class="text">“All of our lorries are fitted with Satellite Tracking and Temperature Controlled monitoring systems so that the transportation of high value and temperature sensitive loads can be monitored at all times.</div>
+									</div>
+									<div class="thumb"><img src="images/resource/testi-thumb-3.jpg" alt="" /></div>
+									<span class="designation">Co Founder</span>
+									<h4 class="name">Mike Hardon</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End Testimonial Section -->
+
+{% endblock %}
+{% block external_js %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa92MP_Iv7GVx4gN7iN7z42cXwAsKFzwY&libraries=places"></script>
+<script type="text/javascript" src="{% static 'js/api/map-postal-filter.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+<script type="text/javascript" src="{% static 'js/api/taxi_booking.js' %}"></script>
+<script>
+
+
+
+</script>
+
+{% endblock %}

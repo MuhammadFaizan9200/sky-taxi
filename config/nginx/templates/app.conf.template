@@ -1,0 +1,32 @@
+# define group app
+upstream taxi_website {
+  # balancing by ip
+  ip_hash;
+  # define server app
+  server taxi_website:8000;
+}
+
+server {
+
+    listen 80;
+    # set client body size to 2M #
+    client_max_body_size 100M;
+
+    # all requests proxies to app
+    location / {
+        proxy_pass http://taxi_website/;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+
+    location /static/ {
+        alias /taxi_website/static/;
+    }
+    location /media/ {
+        alias /taxi_website/media/;
+    }
+
+    # domain localhost
+    server_name localhost;
+}

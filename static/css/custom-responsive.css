@@ -1,0 +1,23 @@
+/* Custom Responsive Styles Css */
+
+@media only screen and (max-width: 1700px){
+
+	.main-menu .navigation>li {
+		margin-right: 36px;
+	}
+}
+@media only screen and (max-width: 1439px){
+
+	.main-header .header-lower {
+		padding-right: 15px;
+	}
+	.why-choose-us .float-image, .header-style-two .header-lower .theme-btn, .main-header .outer-box .theme-btn {
+		display: block;
+	}
+}
+@media only screen and (max-width: 1199px){
+	
+	.header-lower .logo-box {
+		padding: 4px;
+	}
+}

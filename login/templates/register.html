@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!--Register page-->
+			<section class="tabs-section">
+				<div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>Create An Account</h2>
+					</div>
+					<div class="row justify-content-center">
+						<!-- Tabs -->
+						<div class="register-block col-xl-5 col-lg-6 col-md-6 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+							<form method="post"  class="register-form">
+								<div class="content-box">
+									<div class="p-5">
+										<div class="sec-title mb-0 pb-3">
+											<span class="sub-title">Register</span>
+										</div>
+										<input name="email" class="form-control mb-3 register_email" type="email" placeholder="mail@exmaple.com" required />
+										<input name="password" class="form-control mb-3 password" type="password" placeholder="Password" required />
+										<input type="hidden" value="1" name="user_type">
+										<input name="c_password" class="form-control mb-3 c_password" type="password" placeholder="Repeat password" required />
+										<select class="form-control" name="user_type">
+											<option value="0">Select Type</option>
+											<option value="1">Company</option>
+											<option value="2">User</option>
+										</select>		
+										<button type="submit" class="theme-btn btn-style-one mt-2 w-100 submit_register">
+											<span class="btn-title">Register</span>
+										</button>
+
+										<div class="text-center mt-2">
+											<a href="javascript:;" class="text-decoration-underline login_popup"> Already have an account?</a>
+										</div>
+									</div>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--End Register page-->
+{% endblock %}
+
+
+{% block external_js %}
+<script type="text/javascript" src="{% static 'js/api/register.js' %}"></script>
+{% endblock %}

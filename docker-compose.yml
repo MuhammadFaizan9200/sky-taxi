@@ -1,0 +1,46 @@
+# File structure version
+# File structure version
+version: '3'
+
+services:
+
+  taxi_website:
+    environment:
+      - CI_COMMIT_SHORT_SHA
+    build:
+      context: .
+      dockerfile: config/taxi_website/Dockerfile
+    hostname: taxi_website
+    volumes:
+      - ./:/taxi_website
+      - static_volume:/taxi_website/static
+      - media_volume:/taxi_website/media
+    expose:
+      - "8000"      
+  # Web server based on official nginx image
+  # Connect external 8000 (which you can access from browser)
+  # with internal port 8000(which will be linked to taxi_website port 8000 in configs)
+  # Connect local nginx configuration with image configuration
+  nginx:
+    image: nginx
+    hostname: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8000:8000"
+      - "5555:5555"
+    volumes:
+      - ./config/nginx/templates:/etc/nginx/templates
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/nginx/.htpasswd:/etc/nginx/.htpasswd
+      - static_volume:/taxi_website/static
+      - media_volume:/taxi_website/media
+    env_file: .env
+    depends_on:
+      - taxi_website
+#  redis:
+#    image: redis:alpine
+
+volumes:
+  static_volume:
+  media_volume:

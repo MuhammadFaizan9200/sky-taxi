@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!--Login Form page-->
+<section class="tabs-section">
+    <div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+    <div class="anim-icons">
+        <span class="icon icon-wave-line"></span>
+    </div>
+    <div class="auto-container">
+        <div class="sec-title text-center">
+            <span class="sub-title">Skybluetaxi</span>
+            <h2>Information</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="tabs-block col-12 col-xxl-12 col-lg-12 col-md-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="inner-box">
+                    <div class="content-box p-3">
+                        <div class="product-discription">
+                            <div class="tabs-box">
+                                <div class="tab-btn-box text-center px-5">
+                                    <ul class="tab-btns tab-buttons clearfix">
+                                        <li class="tab-btn active-btn tab_1" data-tab="#tab-1">Contact Information</li>
+                                        <li class="tab-btn tab_2" data-tab="#tab-2">Your Order</li>
+                                        <li class="tab-btn tab_3" data-tab="#tab-3">Payment Method</li>
+                                    </ul>
+                                </div>
+                                <div class="tabs-content px-5 pb-5">
+                                    <div class="tab px-5 bg-white active-tab tab_detail_1" id="tab-1">
+                                        <div class="row g-2 horizontal-tab">
+                                            <div class="col-12 form-group mb-0">
+                                                <label class="text-dark">Your Name</label>
+                                                <input type="text" placeholder="Enter Your Name" class="name form-control" required />
+                                            </div>
+                                            <div class="col-12 form-group mb-0 mt-3">
+                                                <label class="text-dark">Phone</label>
+                                                <input type="text" id="phone-input" placeholder="Enter Your Phone" class="form-control phone" required />
+
+                                            </div>
+                                            <div class="col-12 form-group mb-0 mt-3">
+                                                <label class="text-dark">E-mail address</label>
+                                                <input type="text"  placeholder="Enter Your E-mail address" name="email" class="form-control email login_email_local_storage" required />
+                                            </div>
+                                            <div class="col-6 form-group mb-0 mt-3">
+                                                <label class="text-dark">No. Of Bags</label>
+                                                <select class="form-control no_of_bags">
+                                                    <option value="1">1 Bag</option>
+                                                    <option value="2">2 Bags</option>
+                                                    <option value="3">3 Bags</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-6 form-group mb-0 mt-3">
+                                                <label class="text-dark">No. Of Handbags</label>
+                                                <select class="form-control no_of_hand_bags">
+                                                    <option value="1">1 Handbags</option>
+                                                    <option value="2">2 Handbags</option>
+                                                    <option value="3">3 Handbags</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 form-group mb-0 mt-3">
+                                                <label class="text-dark">Comment For Driver</label>
+                                                <textarea type="text" placeholder="Enter Your Comment" name="driver_comment" class="form-control driver_comment"></textarea>
+                                            </div>
+                                            <div class="col-12 form-group mt-4">
+                                                <button type="button" class="theme-btn btn-style-one small-btn btn_third_step"><span class="btn-title"> Next Step</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab px-5 bg-white horizontal-tab tab_detail_2" id="tab-2">
+                                        <div class="mb-4">
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Outward journey</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0"><span class="set_pickup_date"></span> - <span class="set_pickup_time"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">From</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_from"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">To</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_to"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="text-dark">
+                                        <div class="mb-4 return_view_area d-none">
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Return</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0"><span class="set_return_pickup_date"></span> - <span class="set_return_pickup_time"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">From</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_return_from"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">To</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_return_to"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="text-white return_view_area_hr d-none">
+                                        <div class="mb-2">
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Type</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0"><span class="set_type"></span> <span class="set_person"></span> Person</p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Name</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_name"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Phone</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_phone"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">Email Address</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0 set_email"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">No. Of Bags</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0"><span class="set_bags"></span> Bags</p>
+                                                </div>
+                                            </div>
+                                            <div class="row g-2 align-items-center">
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label class="mb-0 fw-bold text-dark">No. Of Handbags</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-8">
+                                                    <p class="text-dark mb-0"><span class="set_handbag"></span> Handbags</p>
+                                                </div>
+                                            </div>
+                                            <hr class="text-white">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4 class="text-dark my-2">Price</h4>
+                                                </div>
+                                                <div class="col">
+                                                    <h4 class="text-dark text-end fw-bold my-2">$ <span class="set_price"></span></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-4">
+                                            <button class="theme-btn btn-style-one small-btn btn_forth_step"><span class="btn-title">Make Reservation</span></button>
+                                        </div>
+                                    </div>
+                                    <div class="tab px-5 bg-white horizontal-tab tab_detail_3" id="tab-3">
+                                        <div class="row">
+                                            <div class="col-12 form-group mb-0 mt-3">
+                                                <label class="text-dark">Card Number</label>
+                                                <input class="form-control" type="text" placeholder="xxxx-xxxx-xxxx-xxxx" required="">
+                                            </div>
+                                            <div class="col-6 form-group mb-0 mt-3">
+                                                <label class="text-dark">Expiry Date</label>
+                                                <input class="form-control" type="date" placeholder="mm/yy" required="">
+                                            </div>
+                                            <div class="col-6 form-group mb-0 mt-3">
+                                                <label class="text-dark">CSV</label>
+                                                <input class="form-control" type="text" placeholder="xxxx" required="">
+                                            </div>
+                                            <div class="col-12 form-group mb-0 mt-3">
+                                                <label class="text-dark">Name On Card</label>
+                                                <input class="form-control" type="text" placeholder="Enter Holder Name" required="">
+                                            </div>
+                                            <div class="form-group mt-4">
+                                                <button class="theme-btn btn-style-one small-btn fifth_step_btn"><span class="btn-title">Confirm Payment</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>            
+
+
+</section>
+
+{% endblock %}
+{% block external_js %}
+<script type="text/javascript" src="{% static 'js/api/taxi_booking.js' %}"></script>
+<script>
+$(window).on("load", function () {
+    var full_name = localStorage.getItem('full_name');
+    var phone = localStorage.getItem('phone');
+    var no_of_bags = localStorage.getItem('no_of_bags');
+    var no_of_hand_bags = localStorage.getItem('no_of_hand_bags');
+    var driver_comment = localStorage.getItem('driver_comment');
+    var postal_code_to = localStorage.getItem('postal_code_to');
+    var postal_code_from =  localStorage.getItem('postal_code_from');
+
+    if (full_name != "") {
+        $('.name').val(full_name);
+        $('.phone').val(phone);
+        $('.no_of_bags').val(no_of_bags);
+        $('.no_of_hand_bags').val(no_of_hand_bags);
+        $('.driver_comment').val(driver_comment);
+        $('.set_from').text(postal_code_from);
+        $('.set_to').text(postal_code_to);
+    }
+
+  })
+
+</script>
+
+{% endblock %}

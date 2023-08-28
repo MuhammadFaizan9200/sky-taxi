@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<!--Register page-->
+			<section class="tabs-section">
+				<div class="bg-image" style="background-image: url(images/background/1.jpg)"></div>
+				<div class="anim-icons">
+					<span class="icon icon-wave-line"></span>
+				</div>
+
+				<div class="auto-container">
+					<div class="sec-title text-center">
+						<span class="sub-title">Skybluetaxi</span>
+						<h2>Verify Account</h2>
+					</div>
+					<div class="row justify-content-center">
+						<!-- Tabs -->
+						<div class="register-block col-xl-5 col-lg-6 col-md-6 col-sm-12 wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+							<div class="inner-box">
+							<form method="post"  class="verify-form">
+								<div class="content-box">
+									<div class="p-5">
+										<div class="sec-title mb-0 pb-3">
+											<span class="sub-title">Verify</span>
+										</div>
+										<input name="verification_code" class="form-control mb-3" type="text" placeholder="123456" required />
+										<input type="hidden" class="verify_email" name="email">
+										<button type="submit" class="theme-btn btn-style-one mt-2 w-100 verify_btn">
+											<span class="btn-title">Verify</span>
+										</button>
+									</div>
+								</div>
+							</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--End Register page-->
+{% endblock %}
+
+
+{% block external_js %}
+<script type="text/javascript" src="{% static 'js/api/register.js' %}"></script>
+<script>
+	var email = localStorage.getItem('email');
+	$('.verify_email').val(email);
+</script>
+{% endblock %}
